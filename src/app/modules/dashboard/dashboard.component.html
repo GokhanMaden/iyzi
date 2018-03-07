@@ -1,0 +1,40 @@
+<table class="table">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">Id</th>
+      <th scope="col">Start Date</th>
+      <th scope="col">End Date</th>
+      <th scope="col">Type</th>
+      <th scope="col">Price</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let item of tickets">
+      <th>{{item.id}}</th>
+      <td>{{item.startDate}}</td>
+      <td>{{item.endDate}}</td>
+      <td>{{item.type}}</td>
+      <td>{{item.price}}{{item.currency}}</td>
+      <td>
+        <button class="btn btn-info" (click)="paymentIsActive = true">Pay</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<div class="row" *ngIf="paymentIsActive == true">
+  <form>
+    <div class="form-group">
+      <label for="formGroupExampleInput">Card Number</label>
+      <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Enter card number.." [(ngModel)]="cardNumber"
+        [ngModelOptions]="{standalone: true}">
+    </div>
+    <div class="form-group">
+      <label for="formGroupExampleInput2">Promotion Code</label>
+      <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="Enter promotion code.." [(ngModel)]="promotionCode"
+        [ngModelOptions]="{standalone: true}">
+    </div>
+    <button class="btn btn-info" (click)=" paymentIsActive = false; ticketPayment()">Pay</button>
+  </form>
+</div>
+
+<toaster-container></toaster-container>
